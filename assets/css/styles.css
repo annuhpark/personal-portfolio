@@ -719,6 +719,16 @@ img {
   transform: translateX(0.25rem);
 }
 
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  content: "";
+}
+
+.swiper-portfolio-icon {
+  font-size: 2rem;
+  color: var(--first-color);
+}
+
 /* ==================== PROJECT IN MIND ==================== */
 
 /* ==================== TESTIMONIAL ==================== */

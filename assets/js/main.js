@@ -5,35 +5,66 @@ const navClose = document.getElementById('nav-close');
 
 // Email Form Submission
 
+// var form = document.querySelector('.my-form');
+// // var button = document.getElementById("my-form-button");
+// var status = document.querySelector('.status-text');
+
+// window.addEventListener('DOMContentLoaded', function () {
+//   // get the form elements defined in your form HTML above
+
+//   // Success and Error functions for after the form is submitted
+
+//   function success() {
+//     form.reset();
+//     // status.classList.add('success');
+//     status.innerHTML = 'Thanks!';
+//     console.log(status);
+//   }
+
+//   function error() {
+//     // status.classList.add('error');
+//     status.innerHTML = 'Oops! There was a problem.';
+//   }
+
+//   // handle the form submission event
+
+//   form.addEventListener('submit', function (ev) {
+//     ev.preventDefault();
+//     var data = new FormData(form);
+//     ajax(form.method, form.action, data, success, error);
+//   });
+// });
+
 var form = document.querySelector('.my-form');
-// var button = document.getElementById("my-form-button");
-var status = document.querySelector('.status-text');
 
-window.addEventListener('DOMContentLoaded', function () {
-  // get the form elements defined in your form HTML above
-
-  // Success and Error functions for after the form is submitted
-
-  function success() {
-    form.reset();
-    // status.classList.add('success');
-    status.innerHTML = 'Thanks!';
-    console.log(status);
-  }
-
-  function error() {
-    // status.classList.add('error');
-    status.innerHTML = 'Oops! There was a problem.';
-  }
-
-  // handle the form submission event
-
-  form.addEventListener('submit', function (ev) {
-    ev.preventDefault();
-    var data = new FormData(form);
-    ajax(form.method, form.action, data, success, error);
+async function handleSubmit(event) {
+  event.preventDefault();
+  var status = document.querySelector('.status-text');
+  var data = new FormData(event.target);
+  fetch(event.target.action, {
+    method: form.method,
+    body: data,
+    headers: {
+      Accept: 'application/json'
+    }
+  }).then(response => {
+    if (response.ok) {
+      status.innerHTML = 'Thanks for your submission!';
+      form.reset();
+    } else {
+      response.json().then(data => {
+        if (Object.hasOwn(data, 'errors')) {
+          status.innerHTML = data.errors.map(error => error.message).join(', ');
+        } else {
+          status.innerHTML = 'Oops! There was a problem submitting your form';
+        }
+      });
+    }
+  }).catch(error => {
+    status.innerHTML = 'Oops! There was a problem submitting your form';
   });
-});
+}
+form.addEventListener('submit', handleSubmit);
 
 // helper function for sending an AJAX request
 

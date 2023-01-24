@@ -240,3 +240,6 @@ themeButton.addEventListener("click", () => {
 });
 
 /* ==================== FOOTER DATE ==================== */
+const footerText = document.querySelector(".footer__copy");
+const currentYear = new Date().getFullYear();
+footerText.textContent = `${currentYear} — Anna Park. Made with HTML, CSS, JavaScript, and ♥`;

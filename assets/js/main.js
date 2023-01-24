@@ -18,10 +18,7 @@ async function handleSubmit(event) {
     },
   })
     .then((response) => {
-      if (response.ok) {
-        status.innerHTML = "Thanks for your submission!";
-        form.reset();
-      } else {
+      if (!response.ok) {
         response.json().then((data) => {
           if (Object.hasOwn(data, "errors")) {
             status.innerHTML = data.errors
@@ -31,9 +28,12 @@ async function handleSubmit(event) {
             status.innerHTML = "Oops! There was a problem submitting your form";
           }
         });
+        return;
       }
+      status.innerHTML = "Thanks for your submission!";
+      form.reset();
     })
-    .catch((error) => {
+    .catch(() => {
       status.innerHTML = "Oops! There was a problem submitting your form";
     });
 }

@@ -26,3 +26,10 @@ The steps below assume that you are using a terminal and have Node.js installed
    `npm i`
 
 4. Open `index.html` using your preferred method
+
+## Images
+
+![Header section](./readme-img/img1.png)
+![About Me section](./readme-img/img2.png)
+![Skills and Qualifications sections](./readme-img/img3.png)
+![Portfolio, contact, and footer sections](./readme-img/img4.png)
